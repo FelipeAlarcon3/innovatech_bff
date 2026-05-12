@@ -1,0 +1,49 @@
+package com.example.BFF.Controller;
+
+import com.example.BFF.Client.ProyectoClient;
+import com.example.BFF.Client.RecursosClient;
+import com.example.BFF.DTO.ProyectoDTO;
+import com.example.BFF.DTO.RecursosDTO;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/bff")
+@CrossOrigin(origins = "*")
+public class BFFController {
+
+    private final ProyectoClient proyectoClient;
+    private final RecursosClient recursoClient;
+
+    public BFFController(ProyectoClient proyectoClient, RecursosClient recursoClient) {
+        this.proyectoClient = proyectoClient;
+        this.recursoClient = recursoClient;
+    }
+
+
+    @GetMapping("/proyectos")
+    public List<ProyectoDTO> listarProyectos() {
+        return proyectoClient.listarTodos();
+    }
+
+    @GetMapping("/proyectos/{id}")
+    public ProyectoDTO buscarProyecto(@PathVariable Long id) {
+        return proyectoClient.buscarPorId(id);
+    }
+
+    @GetMapping("/recursos")
+    public List<RecursosDTO> listarRecursos() {
+        return recursoClient.listarTodos();
+    }
+
+    @GetMapping("/recursos/disponibles")
+    public List<RecursosDTO> recursosDisponibles() {
+        return recursoClient.listarDisponibles();
+    }
+
+    @GetMapping("/recursos/equipo/{nombre}")
+    public List<RecursosDTO> recursosPorEquipo(@PathVariable String nombre) {
+        return recursoClient.listarPorEquipo(nombre);
+    }
+}
