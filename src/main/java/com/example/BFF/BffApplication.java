@@ -12,9 +12,5 @@ public class BffApplication {
 		SpringApplication.run(BffApplication.class, args);
 	}
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
 
 }

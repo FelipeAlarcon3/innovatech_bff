@@ -28,4 +28,8 @@ public class ProyectoClient {
     public ProyectoDTO buscarPorId(Long id) {
         return restTemplate.getForObject(proyectosUrl + "/api/proyectos/" + id, ProyectoDTO.class);
     }
+
+    public ProyectoDTO crear(ProyectoDTO proyecto) {
+        return restTemplate.postForObject(proyectosUrl + "/api/proyectos", proyecto, ProyectoDTO.class);
+    }
 }

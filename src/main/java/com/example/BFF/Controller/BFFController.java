@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/bff")
-@CrossOrigin(origins = "*")
 public class BFFController {
 
     private final ProyectoClient proyectoClient;
@@ -46,4 +45,15 @@ public class BFFController {
     public List<RecursosDTO> recursosPorEquipo(@PathVariable String nombre) {
         return recursoClient.listarPorEquipo(nombre);
     }
+
+    @PostMapping("/recursos")
+    public RecursosDTO crearRecurso(@RequestBody RecursosDTO recurso) {
+        return recursoClient.crear(recurso);
+    }
+
+    @PostMapping("/proyectos")
+    public ProyectoDTO crearProyecto(@RequestBody ProyectoDTO proyecto) {
+        return proyectoClient.crear(proyecto);
+    }
+
 }

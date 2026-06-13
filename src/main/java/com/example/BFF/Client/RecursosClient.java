@@ -34,4 +34,8 @@ public class RecursosClient {
         RecursosDTO[] response = restTemplate.getForObject(recursosUrl + "/api/recursos/equipo/" + equipo, RecursosDTO[].class);
         return Arrays.asList(response);
     }
+
+    public RecursosDTO crear(RecursosDTO recurso) {
+        return restTemplate.postForObject(recursosUrl + "/api/recursos", recurso, RecursosDTO.class);
+    }
 }

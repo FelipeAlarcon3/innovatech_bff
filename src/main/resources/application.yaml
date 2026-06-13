@@ -1,3 +1,14 @@
+server:
+  port: 8083
+
 spring:
   application:
     name: BFF
+
+recursos:
+  service:
+    url: http://localhost:8082
+
+proyectos:
+  service:
+    url: http://localhost:8081
