@@ -12,7 +12,7 @@ recursos:
 
 proyectos:
   service:
-    url: http://localhost:8082 # El Microservicio 1 (Proyectos) corre en el 8082
+    url: http://localhost:8084 # El Microservicio 1 (Proyectos) corre en el 8082
 
 
 resilience4j:
