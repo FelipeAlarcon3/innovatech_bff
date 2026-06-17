@@ -16,7 +16,7 @@ El sistema está compuesto por:
 - BFF (este repositorio)
 - Microservicio de Gestión de Usuarios
 - Microservicio de Gestión de Recursos
-- Base de Datos
+-Microservicio de monitoreo
 
                                 Frontend
                                     │ 
@@ -24,4 +24,6 @@ El sistema está compuesto por:
                                    BFF
                                     │
 Microservicio Recursos  ────────────├──────────── Microservicio Monitoreo
+                                    ├
+                                    ├
                           Microservicio Proyectos
