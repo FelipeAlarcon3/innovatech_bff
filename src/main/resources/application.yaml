@@ -1,14 +1,26 @@
 server:
-  port: 8083
+  port: 8081 # 📝 CORRECCIÓN 1: El BFF se levanta en el 8081 para recibir a React
 
 spring:
   application:
     name: BFF
 
+# 📝 CORRECCIÓN 2: URLs corregidas para apuntar a los puertos reales de tus microservicios
 recursos:
   service:
-    url: http://localhost:8082
+    url: http://localhost:8083 # El Microservicio 2 (Recursos) correrá en el 8083
 
 proyectos:
   service:
-    url: http://localhost:8081
+    url: http://localhost:8082 # El Microservicio 1 (Proyectos) corre en el 8082
+
+# 📝 CORRECCIÓN 3: Configuración agregada de Resilience4j para controlar tus Circuit Breakers
+resilience4j:
+  circuitbreaker:
+    instances:
+      proyectosCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+      recursosCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
