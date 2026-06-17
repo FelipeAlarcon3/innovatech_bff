@@ -18,16 +18,10 @@ El sistema está compuesto por:
 - Microservicio de Gestión de Recursos
 - Base de Datos
 
-```text
-Frontend
-    │
-    ▼
-InnovaTech BFF
-    │
-    ├── Microservicio Usuarios
-    │       │
-    │       └── Base de Datos
-    │
-    └── Microservicio Recursos
-            │
-            └── Base de Datos
+                                Frontend
+                                    │ 
+                                    ▼
+                                   BFF
+                                    │
+Microservicio Recursos  ────────────├──────────── Microservicio Monitoreo
+                          Microservicio Proyectos
