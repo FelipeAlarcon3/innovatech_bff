@@ -51,9 +51,24 @@ public class BFFController {
         return recursoClient.crear(recurso);
     }
 
+    @PutMapping("/recursos/{id}")
+    public RecursosDTO actualizarRecurso(@PathVariable Long id, @RequestBody RecursosDTO recurso) {
+        return recursoClient.actualizar(id, recurso);
+    }
+
     @PostMapping("/proyectos")
     public ProyectoDTO crearProyecto(@RequestBody ProyectoDTO proyecto) {
         return proyectoClient.crear(proyecto);
+    }
+
+    @PutMapping("/proyectos/{id}")
+    public ProyectoDTO actualizarProyecto(@PathVariable Long id, @RequestBody ProyectoDTO proyecto) {
+        return proyectoClient.actualizar(id, proyecto);
+    }
+
+    @DeleteMapping("/proyectos/{id}")
+    public void eliminarProyecto(@PathVariable Long id) {
+        proyectoClient.eliminar(id);
     }
 
 }

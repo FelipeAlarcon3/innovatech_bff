@@ -38,6 +38,17 @@ public class ProyectoClient {
         return restTemplate.postForObject(proyectosUrl + "/api/proyectos", proyecto, ProyectoDTO.class);
     }
 
+    @CircuitBreaker(name = "proyectosCB", fallbackMethod = "fallbackActualizar")
+    public ProyectoDTO actualizar(Long id, ProyectoDTO proyecto) {
+        restTemplate.put(proyectosUrl + "/api/proyectos/" + id, proyecto);
+        return proyecto;
+    }
+
+    @CircuitBreaker(name = "proyectosCB", fallbackMethod = "fallbackEliminar")
+    public void eliminar(Long id) {
+        restTemplate.delete(proyectosUrl + "/api/proyectos/" + id);
+    }
+
     public List<ProyectoDTO> fallbackListarTodos(Throwable excepcion) {
         System.err.println("Circuit Breaker activado en listarTodos. Motivo: " + excepcion.getMessage());
         return Collections.emptyList();
@@ -48,8 +59,18 @@ public class ProyectoClient {
         ProyectoDTO dtoDefectuoso = new ProyectoDTO();
         return dtoDefectuoso;
     }
+
     public ProyectoDTO fallbackCrear(ProyectoDTO proyecto, Throwable excepcion) {
         System.err.println("Circuit Breaker activado en crear proyecto. Motivo: " + excepcion.getMessage());
         return proyecto;
+    }
+
+    public ProyectoDTO fallbackActualizar(Long id, ProyectoDTO proyecto, Throwable excepcion) {
+        System.err.println("Circuit Breaker activado al intentar actualizar proyecto ID " + id + ". Motivo: " + excepcion.getMessage());
+        return proyecto;
+    }
+
+    public void fallbackEliminar(Long id, Throwable excepcion) {
+        System.err.println("Circuit Breaker activado al intentar eliminar proyecto ID " + id + ". Motivo: " + excepcion.getMessage());
     }
 }

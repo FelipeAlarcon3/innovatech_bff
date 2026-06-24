@@ -45,10 +45,16 @@ public class RecursosClient {
         return restTemplate.postForObject(recursosUrl + "/api/recursos", recurso, RecursosDTO.class);
     }
 
+    @CircuitBreaker(name = "recursosCB", fallbackMethod = "fallbackActualizar")
+    public RecursosDTO actualizar(Long id, RecursosDTO recurso) {
+        restTemplate.put(recursosUrl + "/api/recursos/" + id, recurso);
+        return recurso;
+    }
+
 
     public List<RecursosDTO> fallbackListarTodos(Throwable excepcion) {
         System.err.println("Circuit Breaker [recursosCB] activado en listarTodos. Motivo: " + excepcion.getMessage());
-        return Collections.emptyList(); // Devuelve lista vacía al frontend
+        return Collections.emptyList();
     }
 
     public List<RecursosDTO> fallbackListarDisponibles(Throwable excepcion) {
@@ -63,6 +69,11 @@ public class RecursosClient {
 
     public RecursosDTO fallbackCrear(RecursosDTO recurso, Throwable excepcion) {
         System.err.println("Circuit Breaker [recursosCB] activado al intentar crear recurso. Motivo: " + excepcion.getMessage());
+        return recurso;
+    }
+
+    public RecursosDTO fallbackActualizar(Long id, RecursosDTO recurso, Throwable excepcion) {
+        System.err.println("Circuit Breaker [recursosCB] activado al intentar actualizar recurso ID " + id + ". Motivo: " + excepcion.getMessage());
         return recurso;
     }
 }
