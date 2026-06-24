@@ -49,7 +49,7 @@ public class PerfilController {
         return ResponseEntity.ok(perfilLocalEnMemoria);
     }
 
-    //  ACTUALIZAR O GUARDAR EL PERFIL (PUT)
+    //  ACTUALIZAR  O GUARDAR EL PERFIL (PUT)
     @PutMapping
     public ResponseEntity<Map<String, Object>> actualizarPerfil(@RequestBody Map<String, Object> datosPerfil) {
         perfilLocalEnMemoria.put("nombre", datosPerfil.get("nombre"));
